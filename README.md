@@ -43,7 +43,7 @@ Never commit API keys, credentials, production configuration files, database dum
 
 ## License
 
-This project is distributed under the license included in the `LICENSE` file. Third-party dependencies and assets may have separate terms.
+This project is distributed under the [MIT License](LICENSE). Third-party dependencies and assets may be subject to separate license terms.
 
 ## Disclaimer
 
