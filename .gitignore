@@ -1,0 +1,33 @@
+# Operating system and editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+auth.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache
+var/
+generated/
+pub/static/
+pub/media/
+vendor/
+node_modules/
+
+# Local environment
+app/etc/env.php
+app/etc/config.php
+docker-compose.override.yml
