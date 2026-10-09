@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="1column">
+    <head>
+        <css src="Kumar_StoreLocator::css/store-locator.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Kumar\StoreLocator\Block\StoreLocator"
+                name="kumar.storelocator"
+                template="Kumar_StoreLocator::store-locator.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

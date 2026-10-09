@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<kumar_storelocator>
+			<general>
+				<enabled>1</enabled>
+				<google_maps_key></google_maps_key>
+			</general>
+			<map>
+				<default_latitude>52.520008</default_latitude>
+				<default_longitude>13.404954</default_longitude>
+				<default_radius>25</default_radius>
+				<default_marker></default_marker>
+				<active_marker></active_marker>
+			</map>
+		</kumar_storelocator>
+	</default>
+</config>

@@ -1,0 +1,98 @@
+<?php
+/** @var \Kumar\StoreLocator\Block\Adminhtml\Store\Grid $block */
+?>
+
+<div class="page-main-actions">
+    <div class="page-actions">
+        <button
+            class="action-primary"
+            onclick="setLocation('<?= $block->escapeJs($block->getEditUrl()) ?>')"
+        >
+            <span>
+                <?= $block->escapeHtml(__('Add New Store')) ?>
+            </span>
+        </button>
+    </div>
+</div>
+
+<div class="admin__data-grid-wrap">
+    <table class="data-grid">
+        <thead>
+            <tr>
+                <?php foreach ([
+                    'Name',
+                    'Address',
+                    'Latitude / Longitude',
+                    'Phone',
+                    'Rating',
+                    'Sort Order',
+                    'Status',
+                    'Actions'
+                ] as $label): ?>
+                    <th class="data-grid-th">
+                        <span><?= $block->escapeHtml(__($label)) ?></span>
+                    </th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php foreach ($block->getStores() as $store): ?>
+                <tr>
+                    <td class="data-grid-cell">
+                        <?= $block->escapeHtml($store->getName()) ?>
+                    </td>
+
+                    <td class="data-grid-cell">
+                        <?= $block->escapeHtml(
+                            $store->getAddress() . ' ' . $store->getCity()
+                        ) ?>
+                    </td>
+
+                    <td class="data-grid-cell">
+                        <?= $block->escapeHtml(
+                            $store->getLatitude() . ' / ' . $store->getLongitude()
+                        ) ?>
+                    </td>
+
+                    <td class="data-grid-cell">
+                        <?= $block->escapeHtml($store->getPhone()) ?>
+                    </td>
+
+                    <td class="data-grid-cell">
+                        <?= $block->escapeHtml($store->getRating()) ?>
+                    </td>
+
+                    <td class="data-grid-cell">
+                        <?= (int) $store->getSortOrder() ?>
+                    </td>
+
+                    <td class="data-grid-cell">
+                        <?= $store->getStatus()
+                            ? $block->escapeHtml(__('Enabled'))
+                            : $block->escapeHtml(__('Disabled')) ?>
+                    </td>
+
+                    <td class="data-grid-cell">
+                        <a href="<?= $block->escapeUrl(
+                            $block->getEditUrl($store->getId())
+                        ) ?>">
+                            <?= $block->escapeHtml(__('Edit')) ?>
+                        </a>
+                        |
+                        <a
+                            href="<?= $block->escapeUrl(
+                                $block->getDeleteUrl($store->getId())
+                            ) ?>"
+                            onclick="return confirm('<?= $block->escapeJs(
+                                __('Delete this store?')
+                            ) ?>')"
+                        >
+                            <?= $block->escapeHtml(__('Delete')) ?>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,152 @@
+<?php
+/**
+ * Store Locator template.
+ *
+ * @var \Kumar\StoreLocator\Block\StoreLocator $block
+ */
+?>
+
+<?php if ($block->isEnabled()): ?>
+    <div class="kumar-store-locator">
+
+        <div class="kumar-store-search">
+            <input
+                id="kumar-store-search"
+                type="search"
+                placeholder="<?= $block->escapeHtmlAttr(
+                    __('Search by city, postcode or store')
+                ) ?>"
+            >
+
+            <button
+                type="button"
+                id="kumar-store-search-btn"
+            >
+                <?= $block->escapeHtml(__('Search')) ?>
+            </button>
+        </div>
+
+        <div class="kumar-store-body">
+
+            <aside class="kumar-store-list">
+                <?php foreach ($block->getStores() as $store): ?>
+                    <article
+                        class="kumar-store-card"
+                        data-store-id="<?= $block->escapeHtmlAttr(
+                            $store['entity_id']
+                        ) ?>"
+                    >
+                        <?php if (!empty($store['logo'])): ?>
+                            <img
+                                class="kumar-store-logo"
+                                src="<?= $block->escapeUrl(
+                                    $block->getMediaUrl(
+                                        ltrim($store['logo'], '/')
+                                    )
+                                ) ?>"
+                                alt="<?= $block->escapeHtmlAttr(
+                                    $store['name']
+                                ) ?>"
+                            >
+                        <?php endif; ?>
+
+                        <h3>
+                            <?= $block->escapeHtml($store['name']) ?>
+                        </h3>
+
+                        <p>
+                            <?= $block->escapeHtml(
+                                $store['address'] ?? ''
+                            ) ?>
+                            <br>
+                            <?= $block->escapeHtml(
+                                trim(
+                                    ($store['postcode'] ?? '') . ' ' .
+                                    ($store['city'] ?? '')
+                                )
+                            ) ?>
+                        </p>
+
+                        <?php if (!empty($store['phone'])): ?>
+                            <p>
+                                <a href="tel:<?= $block->escapeHtmlAttr(
+                                    $store['phone']
+                                ) ?>">
+                                    <?= $block->escapeHtml(
+                                        $store['phone']
+                                    ) ?>
+                                </a>
+                            </p>
+                        <?php endif; ?>
+
+                        <?php if (!empty($store['email'])): ?>
+                            <p>
+                                <a href="mailto:<?= $block->escapeHtmlAttr(
+                                    $store['email']
+                                ) ?>">
+                                    <?= $block->escapeHtml(
+                                        $store['email']
+                                    ) ?>
+                                </a>
+                            </p>
+                        <?php endif; ?>
+
+                        <?php if (
+                            isset($store['rating']) &&
+                            $store['rating'] !== ''
+                        ): ?>
+                            <p
+                                class="kumar-store-rating"
+                                aria-label="<?= $block->escapeHtmlAttr(
+                                    __('Rating %1 out of 5', $store['rating'])
+                                ) ?>"
+                            >
+                                ★ <?= $block->escapeHtml(
+                                    $store['rating']
+                                ) ?>/5
+
+                                <?php if (!empty($store['review_count'])): ?>
+                                    (<?= (int) $store['review_count'] ?>)
+                                <?php endif; ?>
+                            </p>
+                        <?php endif; ?>
+
+                        <?php if (!empty($store['description'])): ?>
+                            <p>
+                                <?= $block->escapeHtml(
+                                    $store['description']
+                                ) ?>
+                            </p>
+                        <?php endif; ?>
+                    </article>
+                <?php endforeach; ?>
+            </aside>
+
+            <div
+                id="kumar-store-map"
+                class="kumar-store-map"
+            ></div>
+
+        </div>
+    </div>
+
+    <script type="text/x-magento-init">
+    {
+        "#kumar-store-map": {
+            "Kumar_StoreLocator/js/store-locator": {
+                "stores": <?= /* @noEscape */ $block->getJsonStores() ?>,
+                "googleMapsKey": "<?= $block->escapeJs(
+                    $block->getGoogleMapsKey()
+                ) ?>",
+                "mapConfig": <?= /* @noEscape */ json_encode(
+                    $block->getMapConfig(),
+                    JSON_HEX_TAG |
+                    JSON_HEX_APOS |
+                    JSON_HEX_AMP |
+                    JSON_HEX_QUOT
+                ) ?>
+            }
+        }
+    }
+    </script>
+<?php endif; ?>

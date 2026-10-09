@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="kumar" translate="label" sortOrder="80">
+			<label>Kumar</label>
+		</tab>
+		<section id="kumar_storelocator" translate="label" sortOrder="920" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Store Locator</label>
+			<tab>kumar</tab>
+			<resource>Kumar_StoreLocator::storelocator</resource>
+			<group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+				<field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Store Locator</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="google_maps_key" translate="label" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Google Maps API Key</label>
+				</field>
+			</group>
+			<group id="map" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Map Defaults</label>
+				<field id="default_latitude" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Default Latitude</label>
+					<validate>validate-number</validate>
+				</field>
+				<field id="default_longitude" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Default Longitude</label>
+					<validate>validate-number</validate>
+				</field>
+				<field id="default_radius" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Default Search Radius (km)</label>
+					<validate>validate-number validate-greater-than-zero</validate>
+				</field>
+				<field id="default_marker" translate="label" type="image" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Default Marker PNG</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+					<upload_dir config="system/filesystem/media" scope_info="1">kumar/storelocator/markers</upload_dir>
+					<base_url type="media" scope_info="1">kumar/storelocator/markers</base_url>
+					<comment>If empty, Google Maps default marker is used.</comment>
+				</field>
+				<field id="active_marker" translate="label" type="image" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Active Marker PNG</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+					<upload_dir config="system/filesystem/media" scope_info="1">kumar/storelocator/markers</upload_dir>
+					<base_url type="media" scope_info="1">kumar/storelocator/markers</base_url>
+					<comment>Used when a store marker is selected. If empty, the default marker is retained.</comment>
+				</field>
+			</group>
+			<group id="stores" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Stores Management</label>
+				<field id="manage_stores" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Manage Store Details</label>
+					<frontend_model>Kumar\StoreLocator\Block\Adminhtml\System\Config\StoresLink</frontend_model>
+					<comment>Open the store grid to add/edit store name, coordinates, address, contact, logo, rating and sort order.</comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

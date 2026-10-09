@@ -1,0 +1,147 @@
+<?php
+/** @var \Kumar\StoreLocator\Block\Adminhtml\Store\Edit $block */
+
+$store = $block->getStore();
+
+$fields = [
+    ['name', 'Store Name', 'text', true],
+    ['code', 'Store Code', 'text', false],
+    ['status', 'Enabled (1) / Disabled (0)', 'number', true],
+    ['latitude', 'Latitude', 'text', true],
+    ['longitude', 'Longitude', 'text', true],
+    ['address', 'Address', 'text', false],
+    ['city', 'City', 'text', false],
+    ['region', 'State / Region', 'text', false],
+    ['postcode', 'Postcode', 'text', false],
+    ['country_id', 'Country Code (e.g. DE)', 'text', false],
+    ['phone', 'Contact Number', 'text', false],
+    ['email', 'Email', 'email', false],
+    ['website', 'Website URL', 'url', false],
+    ['rating', 'Rating (0–5)', 'number', false],
+    ['review_count', 'Review Count', 'number', false],
+    ['sort_order', 'Sort Order', 'number', true],
+    ['description', 'Description', 'textarea', false],
+    ['opening_hours', 'Opening Hours', 'textarea', false],
+    ['services', 'Services', 'textarea', false],
+];
+
+$fileFields = [
+    'logo' => 'Store Logo',
+    'marker_icon' => 'Store Marker PNG',
+    'active_marker_icon' => 'Active Marker PNG',
+];
+?>
+
+<form
+    action="<?= $block->escapeUrl($block->getSaveUrl()) ?>"
+    method="post"
+    enctype="multipart/form-data"
+    data-form="storelocator-edit"
+>
+    <input
+        name="form_key"
+        type="hidden"
+        value="<?= $block->escapeHtmlAttr($block->getFormKey()) ?>"
+    >
+
+    <input
+        type="hidden"
+        name="entity_id"
+        value="<?= (int) $store->getId() ?>"
+    >
+    <div class="page-main-actions">
+        <div class="page-actions">
+            <button
+                class="action-secondary"
+                type="button"
+                onclick="setLocation('<?= $block->escapeJs($block->getBackUrl()) ?>')"
+            >
+                <span><?= $block->escapeHtml(__('Back')) ?></span>
+            </button>
+
+            <button
+                class="action-primary"
+                type="submit"
+            >
+                <span><?= $block->escapeHtml(__('Save Store')) ?></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title">
+                <?= $block->escapeHtml(__('Store Details')) ?>
+            </span>
+        </div>
+
+        <div class="admin__page-section-content">
+            <fieldset class="admin__fieldset">
+                <?php foreach ($fields as $field): ?>
+                    <?php
+                    [$name, $label, $type, $required] = $field;
+                    $value = $store->getData($name);
+
+                    if ($name === 'status' && $value === null) {
+                        $value = '1';
+                    }
+                    ?>
+
+                    <div class="admin__field">
+                        <label
+                            class="admin__field-label"
+                            for="<?= $block->escapeHtmlAttr($name) ?>"
+                        >
+                            <span>
+                                <?= $block->escapeHtml(__($label)) ?>
+                            </span>
+                        </label>
+
+                        <div class="admin__field-control">
+                            <?php if ($type === 'textarea'): ?>
+                                <textarea
+                                    class="admin__control-textarea"
+                                    name="<?= $block->escapeHtmlAttr($name) ?>"
+                                    id="<?= $block->escapeHtmlAttr($name) ?>"
+                                ><?= $block->escapeHtml($value) ?></textarea>
+                            <?php else: ?>
+                                <input
+                                    class="admin__control-text"
+                                    type="<?= $block->escapeHtmlAttr($type) ?>"
+                                    name="<?= $block->escapeHtmlAttr($name) ?>"
+                                    id="<?= $block->escapeHtmlAttr($name) ?>"
+                                    value="<?= $block->escapeHtmlAttr($value) ?>"
+                                    <?= $required ? 'required="required"' : '' ?>
+                                >
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
+                <?php foreach ($fileFields as $field => $label): ?>
+                    <div class="admin__field">
+                        <label class="admin__field-label">
+                            <span>
+                                <?= $block->escapeHtml(__($label)) ?>
+                            </span>
+                        </label>
+
+                        <div class="admin__field-control">
+                            <?php if ($store->getData($field)): ?>
+                                <p>
+                                    <?= $block->escapeHtml($store->getData($field)) ?>
+                                </p>
+                            <?php endif; ?>
+
+                            <input
+                                type="file"
+                                name="<?= $block->escapeHtmlAttr($field) ?>"
+                                accept=".png,.jpg,.jpeg,.webp,.gif"
+                            >
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </fieldset>
+        </div>
+    </div>
+</form>

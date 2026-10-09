@@ -1,0 +1,16 @@
+{
+  "name": "kunal/magento2-store-locator",
+  "description": "Magento 2 Store Locator with Google Maps, store details and custom marker support.",
+  "type": "magento2-module",
+  "license": "MIT",
+  "require": {
+    "php": "^8.1 || ^8.2 || ^8.3",
+    "magento/framework": "*"
+  },
+  "autoload": {
+    "files": ["registration.php"],
+    "psr-4": {
+      "Kumar\\StoreLocator\\": ""
+    }
+  }
+}

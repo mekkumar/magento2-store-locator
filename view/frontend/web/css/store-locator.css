@@ -1,0 +1,386 @@
+/* =========================================
+   Kumar Store Locator - Glassmorphism UI
+   Magento 2 Compatible
+   ========================================= */
+
+.kumar-store-locator {
+    --ksl-orange: #ff6b35;
+    --ksl-orange-light: #ff884d;
+    --ksl-text: #f8fafc;
+    --ksl-muted: #aab6c9;
+    --ksl-border: rgba(255, 255, 255, 0.14);
+
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    padding: 28px;
+    overflow: hidden;
+    color: var(--ksl-text);
+    border-radius: 24px;
+    background:
+        radial-gradient(
+            circle at 15% 0%,
+            rgba(255, 107, 53, 0.16),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(59, 130, 246, 0.16),
+            transparent 35%
+        ),
+        #0b1120;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.kumar-store-locator,
+.kumar-store-locator *,
+.kumar-store-locator *::before,
+.kumar-store-locator *::after {
+    box-sizing: border-box;
+}
+
+/* Search panel */
+
+.kumar-store-locator .kumar-store-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px;
+    margin: 0 0 22px;
+    border: 1px solid var(--ksl-border);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.kumar-store-locator .kumar-store-search input {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    height: 48px;
+    padding: 0 16px;
+    margin: 0;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: normal;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.kumar-store-locator .kumar-store-search input::placeholder {
+    color: #aab6c9;
+    opacity: 1;
+}
+
+.kumar-store-locator .kumar-store-search input:focus {
+    color: #fff;
+    border-color: var(--ksl-orange);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.12);
+}
+
+.kumar-store-locator .kumar-store-search button {
+    flex: 0 0 auto;
+    min-height: 48px;
+    padding: 0 24px;
+    margin: 0;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff6b35, #ff9b42);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.22);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kumar-store-locator .kumar-store-search button:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #ff7a45, #ffa24f);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(255, 107, 53, 0.3);
+}
+
+/* Main layout: stores on the left, map on the right */
+
+.kumar-store-locator .kumar-store-body {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.65fr);
+    align-items: stretch;
+    gap: 22px;
+    width: 100%;
+    min-height: 620px;
+}
+
+/* Store list */
+
+.kumar-store-locator .kumar-store-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    max-height: 680px;
+    padding: 14px;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid var(--ksl-border);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+.kumar-store-locator .kumar-store-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.kumar-store-locator .kumar-store-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.kumar-store-locator .kumar-store-list::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.22);
+}
+
+/* Individual store cards */
+
+.kumar-store-locator .kumar-store-card {
+    flex: 0 0 auto;
+    min-width: 0;
+    padding: 20px;
+    margin: 0;
+    color: var(--ksl-text);
+    cursor: pointer;
+    border: 1px solid var(--ksl-border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.055);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.kumar-store-locator .kumar-store-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.kumar-store-locator .kumar-store-card.active {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 107, 53, 0.19),
+        rgba(255, 255, 255, 0.075)
+    );
+    border-color: rgba(255, 107, 53, 0.75);
+    box-shadow: 0 8px 28px rgba(255, 107, 53, 0.12);
+}
+
+.kumar-store-locator .kumar-store-card h3 {
+    margin: 0 0 10px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.kumar-store-locator .kumar-store-card p {
+    margin: 8px 0;
+    color: #c4cede;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.kumar-store-locator .kumar-store-card a {
+    color: #ffb18e;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.kumar-store-locator .kumar-store-card a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Store logo */
+
+.kumar-store-locator .kumar-store-logo {
+    display: block;
+    width: auto;
+    max-width: 100px;
+    max-height: 64px;
+    margin: 0 0 14px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Rating */
+
+.kumar-store-locator .kumar-store-rating {
+    display: inline-block;
+    color: #ffc56b !important;
+    font-weight: 700;
+}
+
+/* Google Maps container: explicit height is important */
+
+.kumar-store-locator #kumar-store-map.kumar-store-map {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 680px;
+    min-width: 0;
+    min-height: 480px;
+    align-self: stretch;
+    overflow: hidden;
+    border: 1px solid var(--ksl-border);
+    border-radius: 20px;
+    background: #172033;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* Error state */
+
+.kumar-store-locator .kumar-store-error {
+    padding: 24px;
+    color: #fecaca;
+    background: rgba(127, 29, 29, 0.25);
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+/* Keyboard accessibility */
+
+.kumar-store-locator .kumar-store-search button:focus-visible,
+.kumar-store-locator .kumar-store-card:focus-visible,
+.kumar-store-locator .kumar-store-search input:focus-visible {
+    outline: 2px solid var(--ksl-orange-light);
+    outline-offset: 3px;
+}
+
+.kumar-store-locator .kumar-map-info {
+    color: #000;
+}
+
+.gm-ui-hover-effect {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+}
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+    .kumar-store-locator {
+        padding: 20px;
+    }
+
+    .kumar-store-locator .kumar-store-body {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+        gap: 14px;
+        min-height: 560px;
+    }
+
+    .kumar-store-locator .kumar-store-list {
+        max-height: 600px;
+        padding: 10px;
+    }
+
+    .kumar-store-locator .kumar-store-card {
+        padding: 15px;
+    }
+
+    .kumar-store-locator #kumar-store-map.kumar-store-map {
+        height: 600px;
+        min-height: 420px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+    .kumar-store-locator {
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .kumar-store-locator .kumar-store-search {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 12px;
+        margin-bottom: 14px;
+        border-radius: 14px;
+    }
+
+    .kumar-store-locator .kumar-store-search input,
+    .kumar-store-locator .kumar-store-search button {
+        flex: 0 0 auto;
+        width: 100%;
+        min-height: 46px;
+    }
+
+    .kumar-store-locator .kumar-store-body {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        min-height: 0;
+    }
+
+    .kumar-store-locator .kumar-store-list {
+        order: 1;
+        max-height: 440px;
+        padding: 10px;
+        border-radius: 14px;
+    }
+
+    .kumar-store-locator .kumar-store-card {
+        padding: 15px;
+        border-radius: 13px;
+    }
+
+    .kumar-store-locator .kumar-store-card h3 {
+        font-size: 16px;
+    }
+
+    .kumar-store-locator #kumar-store-map.kumar-store-map {
+        order: 2;
+        height: 420px;
+        min-height: 360px;
+        border-radius: 14px;
+    }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+    .kumar-store-locator .kumar-store-card,
+    .kumar-store-locator .kumar-store-search button,
+    .kumar-store-locator .kumar-store-search input {
+        transition: none;
+    }
+}
