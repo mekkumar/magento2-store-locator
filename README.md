@@ -15,6 +15,9 @@ A Magento 2 extension concept for managing store locations and presenting store 
 > Feature availability depends on the implementation and configuration in the current release.
 <img width="1672" height="941" alt="Store Locator Admin Dashboard Mockup-1" src="https://github.com/user-attachments/assets/57b7d95e-db60-4454-b3cb-d3582e9a9df0" />
 
+<img width="878" height="896" alt="image" src="https://github.com/user-attachments/assets/dd723e6a-0d73-44e6-a334-8423370ae51a" />
+
+
 ## Requirements
 
 - A compatible Magento Open Source or Adobe Commerce installation
